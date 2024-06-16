@@ -12,7 +12,6 @@
 		const platform = import.meta.env.VITE_APP_PLATFORM;
 		showDragbar = platform === 'win32';
 		ready = true;
-		console.log(import.meta.env.VITE_APP_PLATFORM);
 	});
 </script>
 
