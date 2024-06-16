@@ -13,6 +13,7 @@
 		"dev:svelte": "vite dev",
 		"dev:electron": "electron src/electron.cjs",
 		"build": "cross-env NODE_ENV=production npm run build:svelte && npm run build:electron",
+		"build:win": "cross-env NODE_ENV=production npm run build:svelte && electron-builder -w --config build.config.json",
 		"build:svelte": "vite build",
 		"build:electron": "electron-builder -mwl --config build.config.json"
 	},
