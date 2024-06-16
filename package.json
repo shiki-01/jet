@@ -1,11 +1,12 @@
 {
-	"name": "sveltekit-electron",
+	"name": "jet",
+	"productName": "Jet",
 	"version": "0.0.1",
 	"private": true,
-	"description": "Minimal Sveltekit + Electron starter template.",
+	"description": "A Text Editor for Japanese",
 	"main": "src/electron.cjs",
 	"type": "module",
-	"author": "Braden Wiggins",
+	"author": "shiki-01",
 	"scripts": {
 		"dev": "cross-env NODE_ENV=dev npm run dev:all",
 		"dev:all": "concurrently -n=svelte,electron -c='#ff3e00',blue \"npm run dev:svelte\" \"npm run dev:electron\"",
@@ -15,9 +16,17 @@
 		"build:svelte": "vite build",
 		"build:electron": "electron-builder -mwl --config build.config.json"
 	},
-	"engines": {
-		"npm": ">=7",
-		"yarn": "use npm - https://github.com/FractalHQ/sveltekit-electron/issues/12#issuecomment-1068399385"
+	"build": {
+		"appId": "com.shiki01.jet",
+		"productName": "Jet",
+		"mac": {
+			"target": "dmg",
+			"icon": "build/icon.ico"
+		},
+		"win": {
+			"target": "nsis",
+			"icon": "build/icon.ico"
+		}
 	},
 	"browserslist": [
 		"Chrome 89"
