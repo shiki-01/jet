@@ -102,3 +102,19 @@ app.on('window-all-closed', () => {
 ipcMain.on('to-main', (event, count) => {
 	return mainWindow.webContents.send('from-main', `next count is ${count + 1}`);
 });
+
+
+// window
+ipcMain.on('window-close', () => {
+	mainWindow.close();
+});
+ipcMain.on('window-minimize', () => {
+	mainWindow.minimize();
+});
+ipcMain.on('window-maximize', () => {
+	if (mainWindow.isMaximized()) {
+		mainWindow.unmaximize();
+	} else {
+		mainWindow.maximize();
+	}
+});

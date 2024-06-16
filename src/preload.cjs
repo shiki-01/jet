@@ -10,4 +10,9 @@ contextBridge.exposeInMainWorld('electron', {
 	receive: (channel, func) => {
 		ipcRenderer.on(channel, (event, ...args) => func(...args));
 	},
+	window: {
+		close: () => ipcRenderer.send('window-close'),
+		minimize: () => ipcRenderer.send('window-minimize'),
+		maximize: () => ipcRenderer.send('window-maximize'),
+	},
 });
