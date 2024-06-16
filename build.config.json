@@ -1,6 +1,6 @@
 {
-	"appId": "com.example.app",
-	"productName": "Sveltekit Electron",
+	"appId": "com.shiki01.jet",
+	"productName": "Jet",
 	"directories": {
 		"output": "dist"
 	},
@@ -11,5 +11,19 @@
 			"from": "build",
 			"to": ""
 		}
-	]
+	],
+	"mac": {
+		"target": [
+			"dmg",
+			"zip"
+		],
+		"icon": "build/icon.icns"
+	},
+	"win": {
+		"target": [
+			"nsis",
+			"zip"
+		],
+		"icon": "build/icon.ico"
+	}
 }

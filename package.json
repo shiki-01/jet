@@ -16,18 +16,6 @@
 		"build:svelte": "vite build",
 		"build:electron": "electron-builder -mwl --config build.config.json"
 	},
-	"build": {
-		"appId": "com.shiki01.jet",
-		"productName": "Jet",
-		"mac": {
-			"target": "dmg",
-			"icon": "build/icon.ico"
-		},
-		"win": {
-			"target": "nsis",
-			"icon": "build/icon.ico"
-		}
-	},
 	"browserslist": [
 		"Chrome 89"
 	],
