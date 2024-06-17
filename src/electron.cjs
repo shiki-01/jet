@@ -3,6 +3,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const contextMenu = require('electron-context-menu');
 const serve = require('electron-serve');
 const path = require('path');
+const fs = require('fs');
 
 try {
 	require('electron-reloader')(module);
@@ -89,7 +90,14 @@ function createMainWindow() {
 	else serveURL(mainWindow);
 }
 
-app.once('ready', createMainWindow);
+app.once('ready', () => {
+	createMainWindow();
+	const projectDataPath = path.join(app.getPath('userData'), 'JetProjectData');
+
+	if (!fs.existsSync(projectDataPath)) {
+		fs.mkdirSync(projectDataPath, { recursive: true });
+	}
+});
 app.on('activate', () => {
 	if (!mainWindow) {
 		createMainWindow();
@@ -117,4 +125,24 @@ ipcMain.on('window-maximize', () => {
 	} else {
 		mainWindow.maximize();
 	}
+});
+
+// file
+function listFilesRecursively(dir) {
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    const filesList = entries.map(entry => {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+            return { type: 'directory', name: entry.name, path: fullPath, children: listFilesRecursively(fullPath) };
+        } else {
+            return { type: 'file', name: entry.name, path: fullPath };
+        }
+    });
+    return filesList;
+}
+
+ipcMain.handle('get-project', async (event) => {
+    const projectDataPath = path.join(app.getPath('userData'), 'JetProjectData');
+    const structure = listFilesRecursively(projectDataPath);
+    return structure;
 });
