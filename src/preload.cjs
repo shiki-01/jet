@@ -17,5 +17,10 @@ contextBridge.exposeInMainWorld('electron', {
 	},
 	project: {
 		get: async () => await ipcRenderer.invoke('get-project'),
+		getData: async (filePath) => await ipcRenderer.invoke('get-project-data', filePath),
+		getFile: async (filePath) => await ipcRenderer.invoke('get-file', filePath),
+		saveFile: async (filePath, data) => await ipcRenderer.invoke('save-file', filePath, data),
+		createFile: async (fileName) => await ipcRenderer.invoke('create-file', fileName),
+		createFolder: async (folderName) => await ipcRenderer.invoke('create-folder', folderName),
 	},
 });

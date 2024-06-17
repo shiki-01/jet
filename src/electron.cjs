@@ -146,3 +146,31 @@ ipcMain.handle('get-project', async (event) => {
     const structure = listFilesRecursively(projectDataPath);
     return structure;
 });
+
+ipcMain.handle('get-project-data', async (event, filePath) => {
+	const configPath = path.join(app.getPath('userData'), 'JetProjectData', filePath, 'config.json');
+	const config = fs.readFileSync(configPath, 'utf-8');
+	return config;
+});
+
+ipcMain.handle('get-file', async (event, filePath) => {
+	const file = fs.readFileSync(filePath, 'utf-8');
+	return file;
+});
+
+ipcMain.handle('save-file', async (event, filePath, content) => {
+	fs.writeFileSync(filePath, content);
+	return true;
+});
+
+ipcMain.handle('create-file', async (event, fileName) => {
+	const filePath = path.join(app.getPath('userData'), 'JetProjectData', fileName);
+	fs.writeFileSync(filePath, '');
+	return true;
+});
+
+ipcMain.handle('create-folder', async (event, folderName) => {
+	const folderPath = path.join(app.getPath('userData'), 'JetProjectData', folderName);
+	fs.mkdirSync(folderPath, { recursive: true });
+	return true;
+});
