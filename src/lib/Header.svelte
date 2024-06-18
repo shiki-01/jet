@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import DirTree from './DirTree.svelte';
 
 	let projects: any;
 	onMount(async () => {
@@ -9,5 +10,10 @@
 </script>
 
 <div class="w-full h-full">
-	<p>hello</p>
+	<a href="/">Svelte REPL</a>
+	{#if projects}
+		<DirTree {projects} />
+	{:else}
+		<div>Loading...</div>
+	{/if}
 </div>
