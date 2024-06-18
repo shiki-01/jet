@@ -6,7 +6,7 @@
 		const parts = path.split('\\');
 		const jetProjectDataIndex = parts.indexOf('JetProjectData');
 		if (jetProjectDataIndex !== -1) {
-			return '/project/' + parts.slice(jetProjectDataIndex + 1).join('/');
+			return '/project/' + parts.slice(jetProjectDataIndex + 1).join('-');
 		}
 		return path.replace(/\\/g, '/');
 	}
